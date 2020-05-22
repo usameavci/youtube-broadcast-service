@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+const Application = require('../bootstrap/Application');
+const { FFmpegManager } = require('../services/FFmpegService');
+const YoutubeService = require('../services/YoutubeService');
+
+Application.registerService('youtube', app => {
+    const env = app.getEnvironment();
+
+    return new YoutubeService({
+        oAuthOptions: {
+            clientId: env.get('YOUTUBE_CLIENT_ID'),
+            clientSecret: env.get('YOUTUBE_CLIENT_SECRET'),
+            redirectUri: env.get('YOUTUBE_REDIRECT_URI'),
+        },
+        credentials: {
+            access_token: env.get('YOUTUBE_ACCESS_TOKEN'),
+            refresh_token: env.get('YOUTUBE_REFRESH_TOKEN'),
+            scope: env.get('YOUTUBE_SCOPE'),
+            token_type: env.get('YOUTUBE_TOKEN_TYPE'),
+            expiry_date: env.get('YOUTUBE_EXPIRY_DATE'),
+        },
+    })
+});
+
+Application.registerService('ffmpegManager', () => new FFmpegManager());
+
+(async () => await Application.start())();
