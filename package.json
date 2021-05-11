@@ -13,7 +13,7 @@
     "dynamic.io": "^0.0.3",
     "express": "^4.17.1",
     "googleapis": "^51.0.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "moment": "^2.26.0",
     "socket.io": "^2.3.0"
   },
